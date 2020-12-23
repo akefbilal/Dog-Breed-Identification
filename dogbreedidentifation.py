@@ -1,8 +1,8 @@
-
 from sklearn.datasets import load_files       
 from keras.utils import np_utils
 import numpy as np
 from glob import glob
+import tensorflow as tf
 
 def load_dataset(path):
     data = load_files(path)
@@ -13,13 +13,6 @@ def load_dataset(path):
 train_files, train_targets = load_dataset('/content/drive/MyDrive/train')
 valid_files, valid_targets = load_dataset('/content/drive/MyDrive/valid')
 test_files, test_targets = load_dataset('/content/drive/MyDrive/test')
-
-len(train_files)
-
-len(valid_files)
-
-len(test_files)
-
 
 
 print('There are %s total dog images.\n' % len(np.hstack([train_files, valid_files, test_files])))
@@ -71,8 +64,6 @@ bottleneck_features = np.load('/content/drive/MyDrive/DogResnet50Data.npz')
 train_Resnet50 = bottleneck_features['train']
 valid_Resnet50 = bottleneck_features['valid']
 test_Resnet50 = bottleneck_features['test']
-
-import tensorflow as tf
 
 Resnet50_model = tf.keras.models.Sequential()
 Resnet50_model.add(tf.keras.layers.GlobalAveragePooling2D(input_shape=train_Resnet50.shape[1:]))
